@@ -1,6 +1,6 @@
 # anilanar/dotenv
 
-Reuse .env files in your repo by sourcing them and making them available in your environment as environment variables.
+Reuse .env files in your repo by sourcing them and making them available in your environment as environment variables. You can also check the [registry page](https://circleci.com/orbs/registry/orb/anilanar/dotenv).
 
 ## Usage
 
