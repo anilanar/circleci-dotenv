@@ -1,0 +1,32 @@
+version: 2.1
+description: Allows you to reuse .env files, by making it available as env vars. Only guranteed to work when shell is bash. Depens on cat, awk.
+
+commands:
+  source:
+    description: Sources an .env file.
+    parameters:
+      path:
+        description: Path to the .env file. Relative to working directory or absolute.
+        type: string
+    steps:
+      - run:
+          name: source <<parameters.path>>
+          command: cat <<parameters.path>> | awk '{print "export " $0}' >> $BASH_ENV
+
+examples:
+  basic:
+    description: Basic usage
+    usage:
+      version: 2.1
+      orbs:
+        dotenv: anilanar/dotenv@volatile
+      jobs:
+        build:
+          docker:
+            - image: circleci/node:8.17
+          working_directory: ~/repo
+          steps:
+            - checkout
+            - dotenv/source:
+                path: .env
+            - run: make build
